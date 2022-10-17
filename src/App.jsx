@@ -4,6 +4,7 @@ import Nav from './components/Nav'
 import './App.css'
 import Search from './components/Search'
 import Filter from './components/Filter'
+import Listings from './components/Listings'
 const App = () => {
   return (
     <Router>
@@ -12,6 +13,7 @@ const App = () => {
         <div className='container'>
           <Search />
           <Filter />
+          <Listings />
         </div>
       </div>
     </Router>
