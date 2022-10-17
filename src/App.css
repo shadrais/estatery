@@ -1,0 +1,129 @@
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.nav {
+  height: 15vh;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.nav-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  gap: 1rem;
+}
+
+.nav-social {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 30%;
+  gap: 1rem;
+}
+
+.btn {
+  width: 6rem;
+  height: 3rem;
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.btn-filled {
+  background-color: #354fc4;
+  color: #ffffff;
+}
+
+.btn:hover {
+  background-color: #8b8e9f;
+}
+
+.btn-filled:hover {
+  background-color: #9baaea;
+  color: #000;
+}
+
+.main-page {
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;  */
+  /* align-items: center; */
+  background-color: rgb(220, 220, 220);
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  gap: 1rem;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  gap: 1rem;
+  margin-top: 2rem;
+  background-color: white;
+  height: 100px;
+  border-radius: 12px;
+}
+
+.filter-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  height: 2rem;
+  border: none;
+}
+
+.input-search {
+  padding: 0.5rem;
+  height: 3rem;
+  border-radius: 8px;
+  background-color: white;
+  /* border: 1px solid black; */
+}
+
+.input:focus {
+  outline: none;
+  border-bottom: 1px solid #354fc4;
+}
