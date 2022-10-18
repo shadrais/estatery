@@ -1,9 +1,13 @@
 import React from 'react'
 import Card from './Card'
 import useListing from '../context/listingContext'
+import { useEffect } from 'react'
 
 const Listings = () => {
-  const { listing } = useListing()
+  const { listing, reset } = useListing()
+  useEffect(() => {
+    reset()
+  }, [])
   return (
     <div className={`${listing.length && 'listings'}`}>
       {listing.length > 0 ? (

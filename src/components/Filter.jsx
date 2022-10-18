@@ -5,14 +5,12 @@ import { toast } from 'react-hot-toast'
 
 const Filter = () => {
   const { filteredTerms, filter: prevFilter } = useListing()
-  const [filter, setFilter] = useState(
-    prevFilter || {
-      location: '',
-      date: '',
-      range: '',
-      type: '',
-    }
-  )
+  const [filter, setFilter] = useState({
+    location: '',
+    date: '',
+    range: '',
+    type: '',
+  })
   const handleFilter = (e) => {
     setFilter({ ...filter, [e.target.name]: e.target.value })
   }

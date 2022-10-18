@@ -24,6 +24,12 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  const reset = () => {
+    console.log('reset')
+    setListing(data)
+    setFilterApplied(false)
+  }
+
   const locationFilter = (loc, item) => {
     if (loc === '' || loc === null || loc.length < 1) {
       return true
@@ -91,6 +97,7 @@ export const ContextProvider = ({ children }) => {
     const { location, date, range, type } = filters
     if (!location && !date && !range && !type) {
       setFilterApplied(false)
+      setListing(data)
     } else {
       setFilterApplied(true)
     }
@@ -127,7 +134,7 @@ export const ContextProvider = ({ children }) => {
         handleFavourites,
         favourites,
         filteredTerms,
-        filter,
+        reset,
       }}>
       {children}
     </ListingContext.Provider>
