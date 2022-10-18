@@ -5,6 +5,7 @@ import './App.css'
 import Home from './pages/Home'
 import { ContextProvider } from './context/listingContext'
 import Favorurites from './pages/Favorurites'
+import { Toaster } from 'react-hot-toast'
 const App = () => {
   return (
     <ContextProvider>
@@ -19,6 +20,7 @@ const App = () => {
           </div>
         </div>
       </Router>
+      <Toaster />
     </ContextProvider>
   )
 }

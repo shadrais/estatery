@@ -1,15 +1,18 @@
 import React from 'react'
 import { useState } from 'react'
 import useListing from '../context/listingContext'
+import { toast } from 'react-hot-toast'
 
 const Filter = () => {
-  const [filter, setFilter] = useState({
-    location: '',
-    date: '',
-    range: '',
-    type: '',
-  })
-  const { filteredTerms } = useListing()
+  const { filteredTerms, filter: prevFilter } = useListing()
+  const [filter, setFilter] = useState(
+    prevFilter || {
+      location: '',
+      date: '',
+      range: '',
+      type: '',
+    }
+  )
   const handleFilter = (e) => {
     setFilter({ ...filter, [e.target.name]: e.target.value })
   }
@@ -40,7 +43,13 @@ const Filter = () => {
               type='date'
               placeholder='Enter Date'
               name='date'
+              tooltip='Date within octobers are available'
               value={filter.date}
+              onClick={() =>
+                toast(
+                  'Date within october "2022" are available due to limited data'
+                )
+              }
               onChange={handleFilter}
             />
           </div>

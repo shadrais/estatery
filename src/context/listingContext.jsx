@@ -7,7 +7,7 @@ export const ContextProvider = ({ children }) => {
   const [listing, setListing] = useState(data)
   const [favourites, setFavourites] = useState([])
   const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState({})
+  const [filter, setFilter] = useState(null)
   const [filterApplied, setFilterApplied] = useState(false)
 
   const handleSearch = (searchTerm) => {
@@ -60,6 +60,17 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  const dateFilter = (date, item) => {
+    if (date === '' || date === null || date.length < 1) {
+      return true
+    }
+    if (Date.parse(date) === Date.parse(item.date)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const handleSearchAndFilter = (searchTerm, item) => {
     if (searchTerm === '' || searchTerm === null || searchTerm.length < 1) {
       return true
@@ -89,7 +100,8 @@ export const ContextProvider = ({ children }) => {
         locationFilter(location, item) &&
         rangeFilter(start, end, item) &&
         typeFilter(type, item) &&
-        handleSearchAndFilter(search, item)
+        handleSearchAndFilter(search, item) &&
+        dateFilter(date, item)
       )
     })
     setListing(!filtered ? data : filtered)
@@ -115,6 +127,7 @@ export const ContextProvider = ({ children }) => {
         handleFavourites,
         favourites,
         filteredTerms,
+        filter,
       }}>
       {children}
     </ListingContext.Provider>
