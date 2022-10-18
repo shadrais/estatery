@@ -6,18 +6,22 @@ export const ListingContext = createContext()
 export const ContextProvider = ({ children }) => {
   const [listing, setListing] = useState(data)
   const [favourites, setFavourites] = useState([])
+  const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState({})
+  const [filterApplied, setFilterApplied] = useState(false)
 
   const handleSearch = (searchTerm) => {
+    setSearch(searchTerm)
     if (searchTerm === '' || searchTerm === null || searchTerm.length < 1) {
-      console.log('no search term')
-      setListing(data)
+      !filterApplied ? setListing(data) : filteredTerms(filter)
+    } else {
+      const filtered = listing.filter((item) => {
+        return Object.keys(item).some((key) =>
+          item[key].toString().toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      })
+      setListing(filtered)
     }
-    const filtered = data.filter((item) => {
-      return Object.keys(item).some((key) =>
-        item[key].toString().toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    })
-    setListing(!filtered ? data : filtered)
   }
 
   const locationFilter = (loc, item) => {
@@ -56,23 +60,42 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  const handleSearchAndFilter = (searchTerm, item) => {
+    if (searchTerm === '' || searchTerm === null || searchTerm.length < 1) {
+      return true
+    }
+    if (
+      Object.keys(item).some((key) =>
+        item[key].toString().toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const filteredTerms = (filters) => {
+    setFilter(filters)
     const { location, date, range, type } = filters
+    if (!location && !date && !range && !type) {
+      setFilterApplied(false)
+    } else {
+      setFilterApplied(true)
+    }
     const [start, end] = range.split(',')
-    console.log(start, end, location)
     const filtered = data.filter((item) => {
       return (
         locationFilter(location, item) &&
         rangeFilter(start, end, item) &&
-        typeFilter(type, item)
+        typeFilter(type, item) &&
+        handleSearchAndFilter(search, item)
       )
     })
     setListing(!filtered ? data : filtered)
   }
 
   const handleFavourites = (id, status) => {
-    console.log(id, status)
-
     const newListing = listing.map((item) => {
       if (item.id === id) {
         item.liked = status

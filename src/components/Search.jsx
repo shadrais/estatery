@@ -8,7 +8,6 @@ const Search = () => {
   const debouncedSearchTerm = useDebounce(search, 500)
 
   useEffect(() => {
-    console.log(debouncedSearchTerm)
     handleSearch(debouncedSearchTerm)
   }, [debouncedSearchTerm])
 

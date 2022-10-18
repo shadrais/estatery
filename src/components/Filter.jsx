@@ -15,7 +15,6 @@ const Filter = () => {
   }
 
   const handleClick = () => {
-    console.log(filter)
     filteredTerms(filter)
   }
 

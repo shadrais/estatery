@@ -4,7 +4,6 @@ import useListing from '../context/listingContext'
 
 const Favorurites = () => {
   const { favourites } = useListing()
-  console.log(favourites)
   return (
     <div className={`${favourites.length && 'listings'}`}>
       {favourites.length ? (
