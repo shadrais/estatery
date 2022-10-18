@@ -5,7 +5,7 @@ export const ListingContext = createContext()
 
 export const ContextProvider = ({ children }) => {
   const [listing, setListing] = useState(data)
-  const [search, setSearch] = useState('')
+  const [favourites, setFavourites] = useState([])
 
   const handleSearch = (searchTerm) => {
     if (searchTerm === '' || searchTerm === null || searchTerm.length < 1) {
@@ -20,8 +20,79 @@ export const ContextProvider = ({ children }) => {
     setListing(!filtered ? data : filtered)
   }
 
+  const locationFilter = (loc, item) => {
+    if (loc === '' || loc === null || loc.length < 1) {
+      return true
+    }
+    if (
+      item.address.toLowerCase().includes(loc.toLowerCase()) ||
+      item.country.toLowerCase().includes(loc.toLowerCase())
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const rangeFilter = (start, end, item) => {
+    if (start === '' || start === null || start.length < 1) {
+      return true
+    }
+    if (item.price >= start && item.price <= end) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const typeFilter = (type, item) => {
+    if (type === '' || type === null || type.length < 1) {
+      return true
+    }
+    if (item.type.toLowerCase().includes(type.toLowerCase())) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const filteredTerms = (filters) => {
+    const { location, date, range, type } = filters
+    const [start, end] = range.split(',')
+    console.log(start, end, location)
+    const filtered = data.filter((item) => {
+      return (
+        locationFilter(location, item) &&
+        rangeFilter(start, end, item) &&
+        typeFilter(type, item)
+      )
+    })
+    setListing(!filtered ? data : filtered)
+  }
+
+  const handleFavourites = (id, status) => {
+    console.log(id, status)
+
+    const newListing = listing.map((item) => {
+      if (item.id === id) {
+        item.liked = status
+      }
+      return item
+    })
+    setListing(newListing)
+    setFavourites(newListing.filter((item) => item.liked === true))
+  }
+
   return (
-    <ListingContext.Provider value={{ listing, setListing, handleSearch }}>
+    <ListingContext.Provider
+      value={{
+        listing,
+        setListing,
+        handleSearch,
+        handleFavourites,
+        favourites,
+        filteredTerms,
+      }}>
       {children}
     </ListingContext.Provider>
   )

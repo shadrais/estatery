@@ -5,13 +5,11 @@ import Search from '../components/Search'
 
 const Home = () => {
   return (
-    <div className='main-page'>
-      <div className='container'>
-        <Search />
-        <Filter />
-        <Listings />
-      </div>
-    </div>
+    <>
+      <Search />
+      <Filter />
+      <Listings />
+    </>
   )
 }
 

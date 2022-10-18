@@ -11,3 +11,7 @@ button,
 select {
   font-family: 'Poppins', sans-serif;
 }
+
+body {
+  background-color: rgb(220, 220, 220);
+}

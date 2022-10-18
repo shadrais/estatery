@@ -10,10 +10,14 @@ const App = () => {
     <ContextProvider>
       <Router>
         <Nav />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/favourites' element={<Favorurites />} />
-        </Routes>
+        <div className='main-page'>
+          <div className='container'>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/favourites' element={<Favorurites />} />
+            </Routes>
+          </div>
+        </div>
       </Router>
     </ContextProvider>
   )

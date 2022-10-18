@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import useListing from '../context/listingContext'
 
 const Filter = () => {
   const [filter, setFilter] = useState({
@@ -8,13 +9,14 @@ const Filter = () => {
     range: '',
     type: '',
   })
-
+  const { filteredTerms } = useListing()
   const handleFilter = (e) => {
     setFilter({ ...filter, [e.target.name]: e.target.value })
   }
 
   const handleClick = () => {
     console.log(filter)
+    filteredTerms(filter)
   }
 
   return (
@@ -22,7 +24,7 @@ const Filter = () => {
       <div className='filter'>
         <div className='filter-wrapper'>
           <div className='filter-item'>
-            <h3>Location</h3>
+            <h4>Location</h4>
             <input
               className='input'
               type='text'
@@ -33,7 +35,7 @@ const Filter = () => {
             />
           </div>
           <div className='filter-item'>
-            <h3>When</h3>
+            <h4>When</h4>
             <input
               className='input'
               type='date'
@@ -44,20 +46,21 @@ const Filter = () => {
             />
           </div>
           <div className='filter-item'>
-            <h3>Price</h3>
+            <h4>Price</h4>
             <select
               className='input'
               name='range'
               value={filter.range}
               onChange={handleFilter}>
               <option value=''>Select Price</option>
-              <option value='1000'>1000</option>
-              <option value='2000'>2000</option>
-              <option value='3000'>3000</option>
+              <option value={[0, 1000]}>$0-$1000</option>
+              <option value={[1000, 2000]}>$1000-$2000</option>
+              <option value={[2000, 3000]}>$2000-$3000</option>
+              <option value={[3000, 5000]}>$2000-$5000</option>
             </select>
           </div>
           <div className='filter-item'>
-            <h3>Property Type</h3>
+            <h4>Property Type</h4>
             <select
               className='input'
               name='type'

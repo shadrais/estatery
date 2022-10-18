@@ -1,15 +1,20 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Nav = () => {
   return (
     <div className='nav'>
       <div className='nav-wrapper'>
         <div className='nav-links'>
-          <h3>Estatery</h3>
+          <Link to='/'>
+            <h3>Estatery</h3>
+          </Link>
           <button className='btn'>Rent</button>
           <button className='btn'>Buy</button>
           <button className='btn'>Sell</button>
-          <button className='btn'>Manage Property</button>
+          <Link to='/favourites'>
+            <button className='btn'>Favourites</button>
+          </Link>
         </div>
         <div className='nav-social'>
           <button className='btn'>Login</button>

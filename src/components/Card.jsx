@@ -4,19 +4,20 @@ import { FaBath } from 'react-icons/fa'
 import { TbDimensions } from 'react-icons/tb'
 import { BsHeart, BsHeartFill } from 'react-icons/bs'
 import { useState } from 'react'
+import useListing from '../context/listingContext'
 
-const Card = ({ data }) => {
-  const [liked, setLiked] = useState(false)
+const Card = ({ data, src }) => {
+  const { handleFavourites } = useListing()
 
   const handleLikes = () => {
-    setLiked(!liked)
+    handleFavourites(data.id, !data.liked)
   }
 
   return (
     <div className='card'>
       <div>
         <img
-          src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+          src={data.img}
           alt={data.name}
           className='card-img'
           height='200'
@@ -28,7 +29,7 @@ const Card = ({ data }) => {
           <span className='price-bold'>${data.price}</span>
           <span className='price'>/month</span>
         </div>
-        {liked ? (
+        {data.liked ? (
           <BsHeartFill className='icon' onClick={handleLikes} />
         ) : (
           <BsHeart className='icon' onClick={handleLikes} />
