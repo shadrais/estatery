@@ -55,6 +55,14 @@
 
 .btn:hover {
   background-color: #8b8e9f;
+  color: #ffffff;
+  transform: translateY(-4px);
+  transition: all 0.2s ease-in-out;
+}
+
+.active {
+  background-color: #354fc4;
+  color: #ffffff;
 }
 
 .btn-filled:hover {
@@ -232,4 +240,5 @@ h4 {
 .card:hover {
   transform: scale(1.05);
   background-color: honeydew;
+  transition: all 0.2s ease-in-out;
 }
