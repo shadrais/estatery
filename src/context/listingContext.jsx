@@ -115,7 +115,7 @@ export const ContextProvider = ({ children }) => {
   }
 
   const handleFavourites = (id, status) => {
-    const newListing = listing.map((item) => {
+    const newListing = data.map((item) => {
       if (item.id === id) {
         item.liked = status
       }
